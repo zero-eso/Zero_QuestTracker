@@ -1,0 +1,11 @@
+# OS / editor files
+Thumbs.db
+.DS_Store
+
+# Backup / temp files
+*.bak
+*.tmp
+*.orig
+
+# Archive artifacts
+*.zip
