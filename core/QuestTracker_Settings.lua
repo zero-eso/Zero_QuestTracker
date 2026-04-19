@@ -7,9 +7,17 @@ local colorRed 			= "|cFF0000" 	-- Red
 local colorAccent		= "|cB60000"    -- accent red
 local ZERO_BRAND_PURPLE_HEX = "A259FF"
 local ZERO_BRAND_WHITE_HEX = "FFFFFF"
+local ZERO_QUEST_TRACKER_GITHUB_ISSUES_URL = "https://github.com/zero-eso/Zero_QuestTracker/issues"
+local ZERO_QUEST_TRACKER_GITHUB_ISSUES_LINK_TAG = "zero_quest_tracker_issues"
+local ZERO_QUEST_TRACKER_GITHUB_ISSUES_LINK_LABEL = "GitHub Zero_QuestTracker Issues"
 local colorBrandZero	= "|c" .. ZERO_BRAND_PURPLE_HEX
 local colorBrandWhite	= "|c" .. ZERO_BRAND_WHITE_HEX
 local DEFAULT_COLOR = {r = ZO_NORMAL_TEXT.r, g = ZO_NORMAL_TEXT.g, b = ZO_NORMAL_TEXT.b, a = ZO_NORMAL_TEXT.a}
+local ZERO_QUEST_TRACKER_GITHUB_ISSUES_LINK_TEXT = string.format(
+	"|c4F8CEC|H0:%s|h%s|h|r",
+	ZERO_QUEST_TRACKER_GITHUB_ISSUES_LINK_TAG,
+	ZERO_QUEST_TRACKER_GITHUB_ISSUES_LINK_LABEL
+)
 
 local function GetBrandedZeroAddonName(nameRemainder)
 	if not nameRemainder or nameRemainder == "" then
@@ -30,6 +38,12 @@ local function GetAnchorInfo(relativeToName)
 		return RIGHT, LEFT
 	end
 	return LEFT, RIGHT
+end
+
+local function OnQuestTrackerSupportLinkClicked(_, _, _, button)
+	if button == MOUSE_BUTTON_INDEX_LEFT and type(RequestOpenUnsafeURL) == "function" then
+		RequestOpenUnsafeURL(ZERO_QUEST_TRACKER_GITHUB_ISSUES_URL)
+	end
 end
 
 
@@ -162,7 +176,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		},
 		[2] = {
 			type = "submenu",
-			name = "|cAAAAAAGeneral Options",
+			name = "|cE0B84CGeneral",
 			controls = {
 				[1] = {
 					type = "checkbox",
@@ -187,7 +201,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		},-- Added to bypass nested menus
 				[3] = {
 					type = "submenu",
-					name = "|cAAAAAAInterface Behaviour Options",
+					name = "|cFF8C42Interface Behaviour",
 					controls = {    -- Interface Behaviour Options
 						[1] = {
 							type = "checkbox",
@@ -325,7 +339,7 @@ function QuestTracker_CreateSettingsMenu(self)
 				},
 				[4] = {
 					type = "submenu",
-					name = "|cAAAAAAInterface Background Options",
+					name = "|cFF6FAEInterface Background",
 					controls = {	-- Interface background options
 						[1] = {
 							type = "dropdown",
@@ -432,7 +446,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		--},   -- Commented for removal of nested menus
 		[5] = {
 			type = "submenu",
-			name = "|c00AA00Tooltip Options",
+			name = "|c00AA00Tooltip",
 			controls = {
 				[1] = {
 					type = "checkbox",
@@ -485,7 +499,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		},
 		[6] = {
 			type = "submenu",
-			name = "|c0044F0Zone/Category Options",
+			name = "|c0044F0Zone/Category",
 			controls = {
 				[1] = {
 					type = "checkbox",
@@ -549,7 +563,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		},
 		[7] = {
 			type = "submenu",
-			name = "|c0066F0Quest Options",
+			name = "|c0066F0Quest",
 			controls = {
 				[1] = {
 					type = "checkbox",
@@ -657,7 +671,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		},
 		[8] = {
 			type = "submenu",
-			name = "|c0088F0Condition/Objective Options",
+			name = "|c0088F0Condition/Objective",
 			controls = {
 				[1] = {
 					type = "dropdown",
@@ -711,7 +725,7 @@ function QuestTracker_CreateSettingsMenu(self)
 		},
 		[9] = {
 			type = "submenu",
-			name = "|c00AA88Quest Colorization Options",
+			name = "|c00AA88Quest Colorization",
 			controls = {
 				[1] = {
 					type = "checkbox",
@@ -809,10 +823,29 @@ function QuestTracker_CreateSettingsMenu(self)
 			controls = {
 				[1] = {
 					type = "description",
-					text = colorSoftYellow..ZERO_QUEST_TRACKER_NAME..colorSoftYellow.." continues Ravalox' QuestTracker, which itself continued Wykkyd's QuestTracker."
-						.."\n \nUse /zqt to open this settings panel."
+					text = ZERO_QUEST_TRACKER_NAME.." continues Ravalox' QuestTracker, which itself continued Wykkyd's QuestTracker."
+						.."\n \nWhile "..ZERO_QUEST_TRACKER_NAME.." is built off of Ravalox' QuestTracker, future changes, feature work, releases, and versioning are fully self-maintained by the Zero Quest Tracker project."
 						.."\n \nThis fork carries that work forward with continued fixes, customization, and quality-of-life improvements for modern ESO."
-						.."\n \nPlease report bugs and feature requests for this fork wherever you publish the add-on. \r"
+						.."\r"
+				},
+				[2] = {
+					type = "description",
+					title = "|c4F8CECSupport|r",
+					text = string.format("Please report bugs and request features via %s.", ZERO_QUEST_TRACKER_GITHUB_ISSUES_LINK_TEXT),
+					tooltip = "Open the GitHub issues page for Zero Quest Tracker.",
+					enableLinks = OnQuestTrackerSupportLinkClicked,
+					width = "full",
+				},
+				[3] = {
+					type = "header",
+					name = "|cE0B84CSHOUT OUTS:|r",
+				},
+				[4] = {
+					type = "description",
+					text = "Authors who no longer work on the project:"
+						.."\n \nWykkyd for the original Wykkyd's QuestTracker."
+						.."\nRavalox Darkshire / Calia1120 for Ravalox Quest Tracker."
+						.."\n \nMaintenance Team That Supported Ravalox Quest Tracker: Calia1120, Demiknight, Lakashi, Calamath"
 				},
 			},
 		},

@@ -66,8 +66,8 @@ The current source already includes several Zero-specific changes and upgrades:
 
 - Add-on folder: `Zero_QuestTracker`
 - Saved variables: `QuestTrackerSavedVars`
-- API version: `101048`
-- Add-on version: `3.8.3.1`
+- API version: `101049`
+- Add-on version: `R0.0.1`
 
 ## Notes
 

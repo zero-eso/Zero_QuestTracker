@@ -5,7 +5,7 @@ local DEBUG_MODE 			= true
 QUESTTRACKER_DEBUG_TABLE 	= {}
 
 local ADDON_NAME	= "Zero_QuestTracker"
-local VERSION_CODE	= "3.8.3.1"
+local VERSION_CODE	= "R0.0.1"
 
 local CONSTRAINT_WIDTH = 100
 local CONSTRAINT_HEIGHT = 60
